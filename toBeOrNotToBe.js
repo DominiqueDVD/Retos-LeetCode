@@ -19,10 +19,35 @@ Explanation: 5 !== null so this expression returns true.
  * @return {Object}
  */
  var expect = function(val) {
-    
+    return{
+        toBe: function(val2){
+            const result= val===val2;
+            if(!result){
+                throw new Error("Not Equal");
+            }
+            return (result);
+        },
+        notToBe: function(val2){
+            const result= val!==val2;
+            if(!result){
+                throw new Error("Equal");
+            }
+            return (result);
+        
+        }
+       
+    }
+  
 };
+const result1 = () => expect(5).toBe(5); 
+console.log(result1());
 
-/**
- * expect(5).toBe(5); // true
- * expect(5).notToBe(5); // throws "Equal"
- */
+try{
+    const result2 = () => expect(5).toBe(null);
+    console.log(result2());
+
+}catch(error){
+    console.log({"error": error.message});
+}
+const result3 = () => expect(5).notToBe(null);
+console.log(result3());
